@@ -21,9 +21,12 @@ model_urls = {
     'vgg19_bn': 'https://download.pytorch.org/models/vgg19_bn-c79401a0.pth',
 }
 
+custom_model_dir = "./vgg_path"
+
 model_paths = {
-    'vgg16_bn': '/mnt/191/c/torch/vgg16/vgg16_bn-6c64b313.pth',
-    'vgg16': '/mnt/191/c/torch/vgg16/vgg16-397923af.pth',
+    'vgg16_bn': '/home/song/Desktop/APGCC/apgcc/models/backbones/vgg_path/vgg16_bn-6c64b313.pth',
+    # 'vgg16_bn': f'{custom_model_dir}/vgg16_bn-6c64b313.pth',
+    'vgg16': f'{custom_model_dir}/vgg16-397923af.pth',
 }
 
 class VGG(nn.Module):
@@ -94,6 +97,9 @@ def _vgg(arch, cfg, batch_norm, pretrained, progress, sync=False, **kwargs):
         kwargs['init_weights'] = False
     model = VGG(make_layers(cfgs[cfg], batch_norm=batch_norm, sync=sync), **kwargs)
     if pretrained:
+        print('pp')
+        print('pp')
+        print(model_paths[arch])
         state_dict = torch.load(model_paths[arch])
         model.load_state_dict(state_dict)
     return model
