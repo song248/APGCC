@@ -77,15 +77,41 @@ def image_inference(cfg, image_path, save_image_path=None):
     with torch.no_grad():
         output = model(input_tensor)
     
-    # 후처리 예시: output이 density map 형태라고 가정하고, 합계를 예측 인원수로 사용
+    # Output structure check
+    print(f"Output Keys: {output.keys()}")
+
+    # Use 'offset' as density map instead of 'pred_points'
+    if 'offset' in output:
+        density_map = output['offset'].detach().cpu().squeeze(0).numpy()
+    else:
+        raise ValueError("No 'offset' key in model output. Cannot extract density map.")
+
+    print(f"Density Map Shape: {density_map.shape}")
+    print(f"Density Map Max Value: {density_map.max()}")
+    print(f"Density Map Sum: {density_map.sum()}")
+
+    if density_map.max() > 0:
+        density_map = density_map / density_map.max()  # Scale to [0, 1]
+        
+    """
+    with torch.no_grad():
+        output = model(input_tensor)
+
+    print(f"Output Type: {type(output)}")
+    print(f"Output Keys: {output.keys()}") 
+    
     # density_map = output[0].detach().cpu().squeeze(0).numpy()
     if isinstance(output, dict):
         if 'pred_points' in output:
             density_map = output['pred_points'].detach().cpu().squeeze(0).numpy()
+            print(f"Density Map Shape: {density_map.shape}")  # 밀도 맵 크기 확인
+            print(f"Density Map Max Value: {density_map.max()}")  # 최대값 확인
+            print(f"Density Map Sum: {density_map.sum()}")  # 전체 합 확인
         else:
             raise ValueError(f"Unexpected output keys: {output.keys()}")
     else:
         density_map = output[0].detach().cpu().squeeze(0).numpy()
+    """
 
     pred_count = density_map.sum()
     
