@@ -1,0 +1,10 @@
+PERSON_DET = "assets/PersonDet_v3.1.3.pt"
+YOLO_11_N = "yolo11n.pt"
+YOLO_11_S = "yolo11s.pt"
+YOLO_11_X = "yolo11x.pt"
+IMAGE = "sample.png"
+PRED_DIR = "pred"
+LABEL_DIR = "label"
+# 본인 경로로 재설정하세요
+LABEL_EXTRACT_DIR = "/mnt/nas_192tb/videos/AI_Hub_실내외_밀집군중_데이터_이미지/01-1.정식개방데이터/Validation/02.라벨링데이터"
+SOURCE_DIR = "/mnt/nas_192tb/videos/AI_Hub_실내외_밀집군중_데이터_이미지/01-1.정식개방데이터/Validation/01.원천데이터"
