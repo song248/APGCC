@@ -68,7 +68,16 @@ x2 y2
 ...
 ```
 
-## Inference
+## Self-made inference code
+```
+cd apgcc
+```
+```
+python inference.py -c ./configs/SHHA_test.yml --image your_image.png --save_image ./output/output_image.png
+```
+you can check command in infer.sh file  
+
+## Inference(origin)
 - For SHHA dataset:
 ```
 cd apgcc
