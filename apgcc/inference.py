@@ -11,7 +11,7 @@ from config import cfg, merge_from_file, merge_from_list
 
 def parse_args():
     parser = argparse.ArgumentParser('Image Inference for APGCC')
-    parser.add_argument('-c', '--config_file', type=str, default="",
+    parser.add_argument('-c', '--config_file', type=str, default="./configs/SHHA_test.yml",
                         help='Path to config file')
     parser.add_argument('--image', type=str, required=True,
                         help='Path to image file for inference')
