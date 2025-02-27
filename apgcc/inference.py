@@ -13,10 +13,8 @@ def parse_args():
     parser = argparse.ArgumentParser('Image Inference for APGCC')
     parser.add_argument('-c', '--config_file', type=str, default="./configs/SHHA_test.yml",
                         help='Path to config file')
-    parser.add_argument('--image', type=str, required=True,
-                        help='Path to image file for inference')
-    parser.add_argument('--save_image', type=str, default=None,
-                        help='Path to save the output image (optional)')
+    parser.add_argument('--image', type=str,help='Path to image file for inference')
+    parser.add_argument('--save_image', type=str, default=None, help='Path to save the output image (optional)')
     parser.add_argument('opts', help='Overwrite config options from command line',
                         default=None, nargs=argparse.REMAINDER)
     args = parser.parse_args()
